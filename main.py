@@ -7,26 +7,43 @@ from tello_asyncio import Tello
 
 from window import Window
 from window import FlightState
+from window import DroneCommand
 
 
 async def main():
     window = Window()
     drone = Tello()
     state = FlightState.IDLE
+    command = DroneCommand.IDLE
+    while state != FlightState.DISCONNECT:
+        state = window.get_state()
+        command = window.get_command()
 
-    await drone.connect()
+        if state == FlightState.IDLE and command == DroneCommand.CONNECT:
+            await drone.connect()
+            state = FlightState.CONNECTED
+        if state == FlightState.CONNECTED and command == DroneCommand.DISCONNECT:
+            await drone.disconnect()
+            state = FlightState.DISCONNECTED
 
-    await drone.takeoff()
-    await drone.turn_clockwise(360)
-    await drone.flip_forward()
-    await drone.land()
+        if state == FlightState.CONNECTED and command == DroneCommand.TAKEOFF:
+            await drone.takeoff()
+            state = FlightState.FLYING
 
-    await drone.disconnect()
+        if state == FlightState.FLYING and command == DroneCommand.LAND:
+            await drone.land()
+            state = FlightState.CONNECTED
+
+        if state == FlightState.FLYING and command == DroneCommand.FLIP:
+            await drone.flip_forward()
+
+        command = DroneCommand.IDLE
+        window.set_state(command)
+        window.set_command(command)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main()
     asyncio.run(main())
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
