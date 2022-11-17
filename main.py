@@ -15,7 +15,7 @@ async def main():
     drone = Tello()
     state = FlightState.IDLE
     command = DroneCommand.IDLE
-    while state != FlightState.DISCONNECT:
+    while state != FlightState.DISCONNECTED:
         state = window.get_state()
         command = window.get_command()
 

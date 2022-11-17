@@ -68,17 +68,19 @@ class Window:
                 self.button3['text'] = DroneCommand.CONNECT
 
 
-def set_state(self, state):
-    self.state = state
 
 
-def get_state(self):
-    return self.state
+    def set_state(self, state):
+        self.state = state
 
 
-def get_command(self):
-    return self.command
+    def get_state(self):
+        return self.state
 
 
-def set_command(self, command):
-    self.command = command
+    def get_command(self):
+        return self.command
+
+
+    def set_command(self, command):
+        self.command = command
