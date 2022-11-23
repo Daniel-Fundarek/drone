@@ -73,6 +73,7 @@ class Window:
             self.drone.connect()
             # self.connect(True)
 
+
         elif button_num == 4:
             self.drone.land()
             # self.takeoff(False)
