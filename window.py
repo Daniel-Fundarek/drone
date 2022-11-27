@@ -1,5 +1,5 @@
 import tkinter
-import asyncio
+# import asyncio
 from djitellopy import Tello
 # from tello_asyncio import Tello
 from enum import Enum
@@ -32,13 +32,15 @@ class Window:
         self.state = FlightState.IDLE
         self.drone = Tello()
 
-        self.button1 = tkinter.Button(self.window, text=DroneCommand.TAKEOFF, command=lambda: self.start_onclick_thread(1))
+        self.button1 = tkinter.Button(self.window, text=DroneCommand.TAKEOFF,
+                                      command=lambda: self.start_onclick_thread(1))
         self.button1.grid(row=1, column=0)
 
         self.button2 = tkinter.Button(self.window, text=DroneCommand.FLIP, command=lambda: self.start_onclick_thread(2))
         self.button2.grid(row=2, column=0)
 
-        self.button3 = tkinter.Button(self.window, text=DroneCommand.CONNECT, command=lambda: self.start_onclick_thread(3))
+        self.button3 = tkinter.Button(self.window, text=DroneCommand.CONNECT,
+                                      command=lambda: self.start_onclick_thread(3))
         self.button3.grid(row=3, column=0)
         self.button1 = tkinter.Button(self.window, text=DroneCommand.LAND, command=lambda: self.start_onclick_thread(4))
         self.button1.grid(row=1, column=1)
@@ -82,6 +84,8 @@ class Window:
             battery = self.drone.get_battery()
             print(f'battery percentage: {battery}%')
         # self.disconnect(False)
+
+        return
 
     def set_state(self, state):
         self.state = state
