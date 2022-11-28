@@ -12,6 +12,7 @@ from window import DroneCommand
 
 def main():
     window = Window()
+
     #dgfg
 
 
