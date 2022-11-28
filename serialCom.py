@@ -21,6 +21,16 @@ class SerialCom:
             threading.Thread(target=self.read_serial).start()
 
 
+    def string_to_command(self):
+        self.line = self.line.replace(" ", "")
+        word_arr = self.line.split(';')
+
+        self.left_right_command = word_arr(0)
+        self.forward_backward_command = word_arr(1)
+        self.up_down_command = word_arr(2)
+        self.yaw_vel_command = word_arr(3)
+        self.remote_constrol = word_arr(4)
+        self.command = word_arr(5)
 
 
 
