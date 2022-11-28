@@ -10,10 +10,14 @@ class FlightState(Enum):
     LANDING = 1
     FLYING = 2
     IDLE = 3
-    CONNECTED = 4
-    DISCONNECTED = 5
 
+class ConnectionState(Enum):
+    CONNECTED = 1
+    DISCONNECTED = 2
 
+class ConnectionCommand(Enum):
+    CONNECT = 1
+    DISCONNECT = 2
 class DroneCommand(Enum):
     CONNECT = 1
     DISCONNECT = 2
@@ -39,7 +43,7 @@ class Window:
         self.button2 = tkinter.Button(self.window, text=DroneCommand.FLIP, command=lambda: self.start_onclick_thread(2))
         self.button2.grid(row=2, column=0)
 
-        self.button3 = tkinter.Button(self.window, text=DroneCommand.CONNECT,
+        self.button3 = tkinter.Button(self.window, text=DroneState.CONNECT,
                                       command=lambda: self.start_onclick_thread(3))
         self.button3.grid(row=3, column=0)
         self.button1 = tkinter.Button(self.window, text=DroneCommand.LAND, command=lambda: self.start_onclick_thread(4))
