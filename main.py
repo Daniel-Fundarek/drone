@@ -8,12 +8,13 @@
 from window import Window
 from window import FlightState
 from window import DroneCommand
-
+from serialCom import SerialCom
 
 def main():
-    window = Window()
-
+    #window = Window()
+    serial = SerialCom()
     #dgfg
+    serial.continous_read()
 
 
 
