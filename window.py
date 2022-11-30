@@ -25,12 +25,13 @@ class DroneCommand(Enum):
 
 class Window:
 
-    def __init__(self,tello):
+    def __init__(self,tello,serial):
         self.window = tkinter.Tk()
         self.window.geometry('500x500')
         self.command = DroneCommand.IDLE
         self.state = FlightState.IDLE
         self.drone = tello
+        self.serial = serial
 
         self.button1 = tkinter.Button(self.window, text=DroneCommand.TAKEOFF,
                                       command=lambda: self.start_onclick_thread(1))
@@ -78,6 +79,8 @@ class Window:
 
         elif button_num == 4:
             self.drone.land()
+            self.serial.set_command('stop_serial')
+
             # self.takeoff(False)
 
         elif button_num == 5:

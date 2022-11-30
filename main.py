@@ -14,8 +14,9 @@ from serialCom import SerialCom
 
 def main():
     tello = Tello()
-    threading.Thread(target=lambda: Window(tello)).start()
     serial = SerialCom(tello)
+    threading.Thread(target=lambda: Window(tello,serial)).start()
+    serial.continous_read()
 
 
 # threading.Thread(target=lambda: Window(tello))
