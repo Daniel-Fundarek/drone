@@ -14,7 +14,7 @@ class SerialCom:
         self.yaw_vel_command = 0
         self.remote_control = 0
         self.command = ''
-        #self.continous_read()
+        # self.continous_read()
 
     def read_serial(self):
         self.line = self.ser.readline()  # read a '\n' terminated line
@@ -23,9 +23,14 @@ class SerialCom:
 
     def continous_read(self):
         while self.command != 'stop_serial':
-            self.read_serial()
-            self.string_to_command()
-            self.print_cmd()
+
+            if self.command == 'rc_command':
+                self.read_serial()
+                self.read_serial()
+                self.string_to_command()
+                self.print_cmd()
+                self.drone.send_rc_control(self.left_right_command, self.forward_backward_command, self.up_down_command,
+                                           self.yaw_vel_command)
 
             # here will go implementation of flight control
 
@@ -47,7 +52,7 @@ class SerialCom:
 
         self.yaw_vel_command = int(word_arr[3])
         self.remote_control = int(word_arr[4])
-        #self.command = word_arr[5]
+        # self.command = word_arr[5]
 
     def set_command(self, command):
         self.command = command

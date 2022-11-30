@@ -10,10 +10,14 @@ class FlightState(Enum):
     LANDING = 1
     FLYING = 2
     IDLE = 3
-    CONNECTED = 4
-    DISCONNECTED = 5
 
+class ConnectionState(Enum):
+    CONNECTED = 1
+    DISCONNECTED = 2
 
+class ConnectionCommand(Enum):
+    CONNECT = 1
+    DISCONNECT = 2
 class DroneCommand(Enum):
     CONNECT = 1
     DISCONNECT = 2
@@ -28,7 +32,7 @@ class Window:
     def __init__(self,tello,serial):
         self.window = tkinter.Tk()
         self.window.geometry('500x500')
-        self.command = DroneCommand.IDLE
+        self.command = ''#DroneCommand.IDLE
         self.state = FlightState.IDLE
         self.drone = tello
         self.serial = serial
@@ -62,6 +66,7 @@ class Window:
         if button_num == 1:
 
             self.drone.takeoff()
+            self.serial.set_command('rc_command')
             # self.takeoff(True)
 
         elif button_num == 2:
