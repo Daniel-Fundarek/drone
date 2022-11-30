@@ -10,11 +10,12 @@ from window import Window
 from window import FlightState
 from window import DroneCommand
 from serialCom import SerialCom
-
+from runCycle import RunCycle
 
 def main():
+    run_cycle=RunCycle()
     tello = Tello()
-    serial = SerialCom(tello)
+    serial = SerialCom(tello,run_cycle)
     threading.Thread(target=lambda: Window(tello,serial)).start()
     serial.continous_read()
 
