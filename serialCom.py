@@ -32,6 +32,7 @@ class SerialCom:
                 self.drone.send_rc_control(self.left_right_command, self.forward_backward_command, self.up_down_command,
                                            self.yaw_vel_command)
 
+
             # here will go implementation of flight control
 
     def print_cmd(self):
