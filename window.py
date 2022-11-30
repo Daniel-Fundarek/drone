@@ -32,7 +32,7 @@ class Window:
     def __init__(self,tello,serial):
         self.window = tkinter.Tk()
         self.window.geometry('500x500')
-        self.command = DroneCommand.IDLE
+        self.command = ''#DroneCommand.IDLE
         self.state = FlightState.IDLE
         self.drone = tello
         self.serial = serial
@@ -66,6 +66,7 @@ class Window:
         if button_num == 1:
 
             self.drone.takeoff()
+            self.serial.set_command('rc_command')
             # self.takeoff(True)
 
         elif button_num == 2:
