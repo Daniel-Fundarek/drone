@@ -10,10 +10,14 @@ class FlightState(Enum):
     LANDING = 1
     FLYING = 2
     IDLE = 3
-    CONNECTED = 4
-    DISCONNECTED = 5
 
+class ConnectionState(Enum):
+    CONNECTED = 1
+    DISCONNECTED = 2
 
+class ConnectionCommand(Enum):
+    CONNECT = 1
+    DISCONNECT = 2
 class DroneCommand(Enum):
     CONNECT = 1
     DISCONNECT = 2
