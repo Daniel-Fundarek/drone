@@ -1,21 +1,28 @@
 # This is a sample Python script.
+import threading
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-#import asyncio
-#from tello_asyncio import Tello
-
+# import asyncio
+# from tello_asyncio import Tello
+from djitellopy import Tello
 from window import Window
 from window import FlightState
 from window import DroneCommand
 from serialCom import SerialCom
 
-def main():
-    #window = Window()
-    serial = SerialCom()
-    #dgfg
-    serial.continous_read()
 
+def main():
+    tello = Tello()
+    threading.Thread(target=lambda: Window(tello)).start()
+    serial = SerialCom(tello)
+
+
+# threading.Thread(target=lambda: Window(tello))
+# serial.continous_read()
+
+# dgfg
+# serial.continous_read()
 
 
 # Press the green button in the gutter to run the script.

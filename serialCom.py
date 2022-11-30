@@ -3,7 +3,8 @@ import threading
 
 
 class SerialCom:
-    def __init__(self):
+    def __init__(self, tello):
+        self.drone = tello
         self.ser = serial.Serial('COM17', 256000)
         self.line = ''
         self.left_right_command = 0
@@ -13,6 +14,7 @@ class SerialCom:
         self.yaw_vel_command = 0
         self.remote_control = 0
         self.command = ''
+        self.continous_read()
 
     def read_serial(self):
         self.line = self.ser.readline()  # read a '\n' terminated line
@@ -20,12 +22,11 @@ class SerialCom:
         return
 
     def continous_read(self):
-        while self.command == 'stop_serial':
+        while self.command != 'stop_serial':
             self.read_serial()
             self.string_to_command()
             self.print_cmd()
-
-
+            # here will go implementation of flight control
 
     def print_cmd(self):
         print(
@@ -35,8 +36,8 @@ class SerialCom:
         self.line = self.line.decode("utf-8")
 
         self.line = self.line.replace("\\", "")
-        self.line = self.line.replace("\n","")
-        self.line = self.line.replace(" ","")
+        self.line = self.line.replace("\n", "")
+        self.line = self.line.replace(" ", "")
         word_arr = self.line.split(',')
 
         self.left_right_command = int(word_arr[0])

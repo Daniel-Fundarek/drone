@@ -25,12 +25,12 @@ class DroneCommand(Enum):
 
 class Window:
 
-    def __init__(self):
+    def __init__(self,tello):
         self.window = tkinter.Tk()
         self.window.geometry('500x500')
         self.command = DroneCommand.IDLE
         self.state = FlightState.IDLE
-        self.drone = Tello()
+        self.drone = tello
 
         self.button1 = tkinter.Button(self.window, text=DroneCommand.TAKEOFF,
                                       command=lambda: self.start_onclick_thread(1))
