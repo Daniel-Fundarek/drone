@@ -18,42 +18,49 @@ class RunCycle:
         self.drone = Tello()
         self.connectionCommand = ConnectionCommand.DISCONNECT
 
-    def controlDrone(self):
-        remoteControll = 1
-        left_right_velocity = 5
-        forward_backward_velocity = 5
-        up_down_velocity = 0
-        yaw_velocity = 0
+    def controlDrone(self,left_right_command,forward_backward_command,up_down_command,yaw_vel_command,command):
+        #print( f'fLIGHTsTATE: {self.state.name}')
+        if command == 'rc':
+           # print(f'cONTROLLING1')
+            if self.state.name==FlightState.FLYING.name:
+              #  print(f'cONTROLLING2')
+                self.drone.send_rc_control(left_right_command, forward_backward_command, up_down_command,
+                                       yaw_vel_command)
+               # print(f'cONTROLLING3')
 
-        if remoteControll == 1:
-            self.drone.send_rc_control(self, left_right_velocity, forward_backward_velocity, up_down_velocity,
-                                       yaw_velocity)
         else:
-            if self.command.name == DroneCommand.TAKEOFF.name:
+            if command == DroneCommand.TAKEOFF.name:
                 if self.state.name == FlightState.IDLE.name:
                     self.drone.takeoff()
                     self.state = FlightState.FLYING
 
-            elif self.command.name == DroneCommand.LAND.name:
-                if self.command.name == FlightState.FLYING.name:
-                    self.drone.land()
-                    self.state = FlightState.LANDING
-                    threading.Thread(time.sleep(7)).start()
-                    self.state = FlightState.IDLE
 
-            elif self.command.name == DroneCommand.FLIP.name:
+            elif command == DroneCommand.LAND.name:
+              #  print(f'Landing1')
+                if self.state.name == FlightState.FLYING.name:
+                #    print(f'Landing2')
+                    self.drone.land()
+                #    print(f'Landing3')
+                    self.state = FlightState.LANDING
+               #     print(f'Landing4')
+                    threading.Thread(target=lambda:self.landingControll()).start()
+               #     print(f'Landing5')
+
+            elif command == DroneCommand.FLIP.name:
                 if self.command.name == FlightState.FLYING.name:
                     self.drone.flip()
 
-    def powerDrone(self):
-        connectSwitch = 1
-        if self.connectionCommand.name == ConnectionCommand.CONNECT.name:
-            if self.connectionState.name != ConnectionState.CONNECTED.name:
-                self.drone.connect()
-                self.connectionState = ConnectionState.CONNECTED
+   # def powerDrone(self):
+    #    connectSwitch = 1
+     #   if self.connectionCommand.name == ConnectionCommand.CONNECT.name:
+      #      if self.connectionState.name != ConnectionState.CONNECTED.name:
+       #         self.drone.connect()
+        #        self.connectionState = ConnectionState.CONNECTED
 
-
-
+    def landingControll(self):
+        time.sleep(4)
+        self.state = FlightState.IDLE
+        return
     '''      
       if self.connectionCommand.name==ConnectionCommand.DISCONNECT.name:
             if self.connectionState.name == ConnectionState.CONNECTED.name:
