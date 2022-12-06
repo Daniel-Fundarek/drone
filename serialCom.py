@@ -29,12 +29,14 @@ class SerialCom:
         self.read_serial()
         while self.command != 'stop_serial':
             #if self.command == 'rc_command':
+            try:
                 self.read_serial()
                 self.string_to_command()
+            except:
+                print("Reading Failed")
 
-
-                self.print_cmd()
-                self.run_cycle.controlDrone(self.left_right_command,self.forward_backward_command,self.up_down_command,self.yaw_vel_command,self.command)
+            self.print_cmd()
+            self.run_cycle.controlDrone(self.left_right_command,self.forward_backward_command,self.up_down_command,self.yaw_vel_command,self.command)
 
                 #Tu implementovat funkcie
                 #self.drone.send_rc_control(self.left_right_command, self.forward_backward_command, self.up_down_command,self.yaw_vel_command)
