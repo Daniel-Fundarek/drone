@@ -20,6 +20,7 @@ class RunCycle:
 
     def controlDrone(self,left_right_command,forward_backward_command,up_down_command,yaw_vel_command,command):
         #print( f'fLIGHTsTATE: {self.state.name}')
+
         if command == 'rc':
            # print(f'cONTROLLING1')
             if self.state.name==FlightState.FLYING.name:
@@ -61,6 +62,10 @@ class RunCycle:
         time.sleep(4)
         self.state = FlightState.IDLE
         return
+
+    def emegencyLanding(self,prev_count, current_count):
+        if prev_count == current_count:
+            self.drone.land()
     '''      
       if self.connectionCommand.name==ConnectionCommand.DISCONNECT.name:
             if self.connectionState.name == ConnectionState.CONNECTED.name:

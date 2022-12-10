@@ -83,9 +83,8 @@ class Window:
 
 
         elif button_num == 4:
-            self.drone.land()
             self.serial.set_command('stop_serial')
-
+            self.drone.land()
             # self.takeoff(False)
 
         elif button_num == 5:
