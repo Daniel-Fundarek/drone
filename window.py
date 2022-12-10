@@ -23,8 +23,11 @@ class DroneCommand(Enum):
     DISCONNECT = 2
     TAKEOFF = 3
     LAND = 4
-    FLIP = 5
     IDLE = 6
+    rFlip = 7
+    lFlip = 8
+    fFlip = 9
+    bFlip = 10
 
 
 class Window:
