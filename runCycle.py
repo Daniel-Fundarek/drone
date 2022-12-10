@@ -46,9 +46,21 @@ class RunCycle:
                     threading.Thread(target=lambda:self.landingControll()).start()
                #     print(f'Landing5')
 
-            elif command == DroneCommand.FLIP.name:
+            elif command == DroneCommand.fFlip.name:
                 if self.command.name == FlightState.FLYING.name:
-                    self.drone.flip()
+                    self.drone.flip_forward()
+
+            elif command == DroneCommand.bFlip.name:
+                if self.command.name == FlightState.FLYING.name:
+                    self.drone.flip_back()
+
+            elif command == DroneCommand.rFlip.name:
+                if self.command.name == FlightState.FLYING.name:
+                    self.drone.flip_right()
+
+            elif command == DroneCommand.lFlip.name:
+                if self.command.name == FlightState.FLYING.name:
+                    self.drone.flip_left()
 
    # def powerDrone(self):
     #    connectSwitch = 1
