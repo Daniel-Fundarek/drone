@@ -19,7 +19,7 @@ class SerialCom:
         self.prevCounter = -5
         self.drone.connect()
         #self.run_cycle.powerDrone(self)
-
+        self.scale = 2
         # self.continous_read()
 
     def read_serial(self):
@@ -34,10 +34,13 @@ class SerialCom:
             try:
                 self.read_serial()
                 self.string_to_command()
+                self.scale_speed()
 
             except:
                 print("Reading Failed")
-            self.run_cycle.emergencyLanding(self.prevCounter, self.counter)
+
+            if self.run_cycle.emergencyLanding(self.prevCounter, self.counter):
+                self.command = 'stop_serial'
             self.print_cmd()
             self.run_cycle.controlDrone(self.left_right_command,self.forward_backward_command,self.up_down_command,self.yaw_vel_command,self.command)
             self.prevCounter = self.counter
@@ -49,7 +52,7 @@ class SerialCom:
 
     def print_cmd(self):
         print(
-            f'right/letf: {self.left_right_command}, fowr/back: {self.forward_backward_command} up/down: {self.up_down_command}, yaw: {self.yaw_vel_command}, command: {self.command}, prevCounter: {self.prevCounter}, counter: {self.counter}')
+            f'right/letf: {self.left_right_command}, forw/back: {self.forward_backward_command} up/down: {self.up_down_command}, yaw: {self.yaw_vel_command}, command: {self.command}, prevCounter: {self.prevCounter}, counter: {self.counter}')
 
     def string_to_command(self):
         self.line = self.line.decode("utf-8")
@@ -71,5 +74,11 @@ class SerialCom:
 
     def set_command(self, command):
         self.command = command
+
+    def scale_speed(self):
+        self.up_down_command *=2
+        self.left_right_command *=2
+        self.yaw_vel_command *=2
+        self.forward_backward_command *=2
 
 

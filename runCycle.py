@@ -63,9 +63,12 @@ class RunCycle:
         self.state = FlightState.IDLE
         return
 
-    def emegencyLanding(self,prev_count, current_count):
+    def emergencyLanding(self,prev_count, current_count):
         if prev_count == current_count:
             self.drone.land()
+            return True
+        else:
+            return False
     '''      
       if self.connectionCommand.name==ConnectionCommand.DISCONNECT.name:
             if self.connectionState.name == ConnectionState.CONNECTED.name:
