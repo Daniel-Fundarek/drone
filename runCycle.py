@@ -18,16 +18,16 @@ class RunCycle:
         self.drone = Tello()
         self.connectionCommand = ConnectionCommand.DISCONNECT
 
-    def controlDrone(self,left_right_command,forward_backward_command,up_down_command,yaw_vel_command,command):
-        #print( f'fLIGHTsTATE: {self.state.name}')
+    def controlDrone(self, left_right_command, forward_backward_command, up_down_command, yaw_vel_command, command):
+        # print( f'fLIGHTsTATE: {self.state.name}')
 
         if command == 'rc':
-           # print(f'cONTROLLING1')
-            if self.state.name==FlightState.FLYING.name:
-              #  print(f'cONTROLLING2')
+            # print(f'cONTROLLING1')
+            if self.state.name == FlightState.FLYING.name:
+                #  print(f'cONTROLLING2')
                 self.drone.send_rc_control(left_right_command, forward_backward_command, up_down_command,
-                                       yaw_vel_command)
-               # print(f'cONTROLLING3')
+                                           yaw_vel_command)
+            # print(f'cONTROLLING3')
 
         else:
             if command == DroneCommand.TAKEOFF.name:
@@ -37,50 +37,60 @@ class RunCycle:
 
 
             elif command == DroneCommand.LAND.name:
-              #  print(f'Landing1')
+                #  print(f'Landing1')
                 if self.state.name == FlightState.FLYING.name:
-                #    print(f'Landing2')
+                    #    print(f'Landing2')
                     self.drone.land()
-                #    print(f'Landing3')
+                    #    print(f'Landing3')
                     self.state = FlightState.LANDING
-               #     print(f'Landing4')
-                    threading.Thread(target=lambda:self.landingControll()).start()
-               #     print(f'Landing5')
+                    #     print(f'Landing4')
+                    threading.Thread(target=lambda: self.landingControll()).start()
+            #     print(f'Landing5')
 
             elif command == DroneCommand.fFlip.name:
                 if self.state.name == FlightState.FLYING.name:
-                    self.drone.flip_forward()
-
+                    try:
+                        self.drone.flip_forward()
+                    except:
+                        pass
             elif command == DroneCommand.bFlip.name:
                 if self.state.name == FlightState.FLYING.name:
-                    self.drone.flip_back()
-
+                    try:
+                        self.drone.flip_back()
+                    except:
+                        pass
             elif command == DroneCommand.rFlip.name:
                 if self.state.name == FlightState.FLYING.name:
-                    self.drone.flip_right()
-
+                    try:
+                        self.drone.flip_right()
+                    except:
+                        pass
             elif command == DroneCommand.lFlip.name:
                 if self.state.name == FlightState.FLYING.name:
-                    self.drone.flip_left()
+                    try:
+                        self.drone.flip_left()
+                    except:
+                        pass
 
-   # def powerDrone(self):
+    # def powerDrone(self):
     #    connectSwitch = 1
-     #   if self.connectionCommand.name == ConnectionCommand.CONNECT.name:
-      #      if self.connectionState.name != ConnectionState.CONNECTED.name:
-       #         self.drone.connect()
-        #        self.connectionState = ConnectionState.CONNECTED
+    #   if self.connectionCommand.name == ConnectionCommand.CONNECT.name:
+    #      if self.connectionState.name != ConnectionState.CONNECTED.name:
+    #         self.drone.connect()
+    #        self.connectionState = ConnectionState.CONNECTED
 
     def landingControll(self):
         time.sleep(4)
         self.state = FlightState.IDLE
         return
 
-    def emergencyLanding(self,prev_count, current_count):
+    def emergencyLanding(self, prev_count, current_count):
         if prev_count == current_count:
             self.drone.land()
             return True
         else:
             return False
+
     '''      
       if self.connectionCommand.name==ConnectionCommand.DISCONNECT.name:
             if self.connectionState.name == ConnectionState.CONNECTED.name:

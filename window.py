@@ -44,7 +44,7 @@ class Window:
                                       command=lambda: self.start_onclick_thread(1))
         self.button1.grid(row=1, column=0)
 
-        self.button2 = tkinter.Button(self.window, text=DroneCommand.FLIP, command=lambda: self.start_onclick_thread(2))
+        self.button2 = tkinter.Button(self.window, text='DroneCommand.FLIP', command=lambda: self.start_onclick_thread(2))
         self.button2.grid(row=2, column=0)
 
         self.button3 = tkinter.Button(self.window, text=DroneCommand.CONNECT,
@@ -75,7 +75,7 @@ class Window:
         elif button_num == 2:
             # self.drone.flip_back()
 
-            self.drone.flip_right()
+            self.drone.flip_forward()
 
             # self.flip()
 
