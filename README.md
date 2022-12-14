@@ -19,13 +19,13 @@ mód2 - riadenie pristátia, vzlietnutia a flipov
 V oboch módoch je možné riadiť drona len pri stlačenom tlačidle2 (signalizácia stlačenia pomocou zasvietenej zelenej ledky).
 
 Príkazy: 
- LAND - pristátie,
- TAKEOFF - vzlietnutie,
- RC - rc ovládanie drona,
- F_FLIP - flip dopredu,
- B_FLIP - flip dozadu,
- L_FLIP - flip doľava,
- R_FLIP - flip doprava.
+- LAND - pristátie,
+- TAKEOFF - vzlietnutie,
+- RC - rc ovládanie drona,
+- F_FLIP - flip dopredu,
+- B_FLIP - flip dozadu,
+- L_FLIP - flip doľava,
+- R_FLIP - flip doprava.
 
 Opis riadenia drona:
 
