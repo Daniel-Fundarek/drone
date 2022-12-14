@@ -1,10 +1,10 @@
 # drone
 Tím:
 
-Daniel Fundárek
--Jakub Ivan
--Adam Bucko
--Matúš Jankech
+- Daniel Fundárek
+- Jakub Ivan
+- Adam Bucko
+- Matúš Jankech
 
 Opis: 
 Cieľom projektu je ovládať drona RYZE Tello pomocou akcelerometra/gyroskopu umiestnených na senzorovej doske IKS01A2.
