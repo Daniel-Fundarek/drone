@@ -1,4 +1,4 @@
-# api na komunikáciu s dronom
+# Api na komunikáciu s dronom
 Tím:
 
 - Daniel Fundárek
